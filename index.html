@@ -22,14 +22,48 @@ h1 span{display:block;font-family:Georgia,serif;font-style:italic;color:#1d70a8}
 .panel{background:#ffffffed;border:1px solid white;border-radius:24px;padding:clamp(19px,4vw,34px);box-shadow:0 10px 26px #183f6512}
 .panel h2{margin:0 0 8px;font-size:clamp(21px,3vw,27px);color:var(--navy)}
 .lead{margin:0 0 20px;color:var(--muted);line-height:1.6}
-.form-row{display:flex;gap:10px;align-items:stretch;margin-bottom:12px;}
+.form-row{display:flex;gap:10px;align-items:stretch}
 input{flex:1;min-width:0;padding:15px 16px;border:2px solid #d6e6f1;border-radius:14px;background:#fbfdff;font-size:16px;color:var(--ink);outline:none}
 input:focus{border-color:#4194c9;box-shadow:0 0 0 4px #4194c91c}
 button{border:0;border-radius:14px;padding:14px 18px;font-size:15px;font-weight:800;cursor:pointer;transition:.15s}
 button:hover{filter:brightness(1.05);transform:translateY(-1px)}
 .primary{background:linear-gradient(135deg,#103d70,#1675b5);color:white;box-shadow:0 4px 0 #0c2f56}
 .message{min-height:20px;color:#a32e4e;font-size:14px;margin:10px 0 0}
+.result{display:none;margin-top:20px;position:relative;overflow:hidden;text-align:center;padding:24px 18px 22px;border-radius:22px;background:linear-gradient(140deg,#fff9e9,#fff 60%,#e5f5ff);border:2px solid #fff1c9;box-shadow:inset 0 0 0 1px #e5edf3}
+.result.show{display:block;animation:pop .48s cubic-bezier(.2,1.35,.4,1)}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.celebrate{font-size:29px;letter-spacing:5px}
+.result h3{font-family:Georgia,serif;color:#123d70;font-size:clamp(27px,4vw,38px);margin:7px 0}
+.result .caption{color:#65788a;margin:0 0 13px}
+.badge-image{width:min(210px,62vw);height:170px;object-fit:contain;display:block;margin:0 auto 12px;filter:drop-shadow(0 5px 5px #243b4d16)}
+.class-name{display:inline-block;padding:12px 20px;border-radius:100px;background:#123f72;color:white;font-weight:900;font-size:clamp(18px,3.2vw,25px);box-shadow:0 5px 0 #092d54;max-width:100%}
+.encouragement{max-width:450px;margin:18px auto 0;color:#49677f;line-height:1.6}
+.secondary{margin-top:18px;background:white;color:#1b5688;border:1px solid #c6ddec}
+.classes-panel h2{margin-bottom:5px}
+.class-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:17px}
+.class-card{display:flex;align-items:center;gap:12px;min-width:0;padding:11px;background:#fbfdff;border:1px solid #e2edf5;border-radius:16px}
+.class-card img{width:76px;height:82px;object-fit:contain;flex-shrink:0}
+.class-card strong{font-size:14px;line-height:1.35}
+.class-card small{display:block;margin-top:4px;color:#6a7e91;font-size:11px}
+.admin-note{background:#fff7e5;border:1px solid #f4e3b6;padding:13px 15px;border-radius:14px;color:#775c24;font-size:13px;line-height:1.5;margin-top:16px}
+.admin-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.total{background:#e6f3ff;color:#17588b;border-radius:30px;padding:7px 11px;font-weight:800;font-size:13px}
+.records{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+.records li{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 13px;border-radius:12px;background:#f7fbfe;border:1px solid #e4eef5}
+.person{font-weight:800;overflow-wrap:anywhere}
+.mini-pill{font-size:12px;font-weight:800;padding:7px 10px;border-radius:30px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.actions button{font-size:13px}
+.danger{background:#fff0f2;color:#9d2948}
 footer{text-align:center;padding:23px 8px;color:#688097;font-size:13px}
+.confetti{position:fixed;top:-18px;width:8px;height:13px;z-index:8;pointer-events:none;animation:fall 2.8s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(760deg);opacity:.1}}
+@media(max-width:650px){
+ body{padding:10px}.hero{grid-template-columns:58px 1fr;padding:17px 13px;gap:10px}.brand-logo{width:58px}.hero-characters{display:none}
+ .kicker{letter-spacing:1.3px;font-size:9px}h1{font-size:clamp(24px,6vw,34px)}.hero-copy p:last-child{font-size:12px}
+ .form-row{flex-direction:column}.form-row button{width:100%}.class-grid{grid-template-columns:1fr}.class-card img{width:68px;height:70px}
+}
+
 .arcangel-header{display:flex;align-items:center;justify-content:center;gap:22px;padding:26px 24px;border-radius:28px;background:linear-gradient(115deg,#d9f3ff 0%,#fffdf8 53%,#ffe5ef 100%);border:4px solid #fff;box-shadow:0 12px 30px rgba(39,91,130,.12);}
 .arcangel-header .brand-logo{display:block;width:clamp(100px,20vw,165px);height:auto;object-fit:contain;border-radius:16px;background:#fff;padding:6px;box-shadow:0 7px 18px rgba(28,70,110,.12);}
 .arcangel-header .hero-copy{text-align:center;min-width:0;}
@@ -42,39 +76,36 @@ footer{text-align:center;padding:23px 8px;color:#688097;font-size:13px}
 </head>
 <body>
 <div class="page">
-  <header class="hero arcangel-header">
-    <img class="brand-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAq4AAAKvCAIAAAAkwdr0AAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAEAAElEQVR4nOz9Z5Oc15mmiz7LvDbf9KayvIG3BEDQQTRis9Vmz9bs6TxKSwgyjBYjTE8YJ7KYT2ZcZ42SGRWWe5WVe2p3p6a8v9A3c6V5N72gW1Q+Wn/7WJ9KpeZevv97y9Wp413zUa1W7N97NqV47e2bH0eA7H779+3973977/79+3/7533PnvXv3vvvf/66+++/v/+/ff//ff/+vvff/+v3v3/rff//ffv//fff//fff3//fff//v39739/73//79/f///fff/vff//v3v3//fvff//ff3//ff3v//f//v3//f///ffvff//ffv///ff///f//ffvff//ffv/ffv3//ffv///ffv//ffvff//ffv/ffv///ffv//ffvff//ffv/ffv///ffv//ffvff//ffv/ffv//ffv//ffvff//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//ffv//feed">
-    <div class="hero-copy">
-      <div class="kicker">Club de Aventureros</div>
-      <h1>Arcángel <span>Descubre tu clase</span></h1>
-      <p>Inscríbete para registrar tus datos correctamente en el sistema oficial.</p>
-    </div>
-  </header>
-
-  <div class="content">
-    <div class="panel">
-      <h2>Registro de Participantes</h2>
-      <p class="lead">Ingresa tus datos a continuación para guardar tu registro de manera segura.</p>
-      
-      <!-- FORMULARIO CONECTADO A PHP -->
-      <form action="registrar.php" method="POST">
-        <div class="form-row" style="margin-bottom: 12px;">
-          <input type="text" name="nombre" placeholder="Nombre completo" required>
-        </div>
-        <div class="form-row" style="margin-bottom: 12px;">
-          <input type="email" name="email" placeholder="Correo electrónico" required>
-        </div>
-        <div class="form-row" style="margin-bottom: 15px;">
-          <input type="password" name="password" placeholder="Contraseña" required>
-        </div>
-        <button type="submit" class="primary" style="width: 100%;">Registrarse en el Sistema</button>
-      </form>
-    </div>
+<header class="hero arcangel-header">
+  <img class="brand-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAq4AAAKvCAIAAAAkwdr0AAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAEAAElEQVR4nOz9Z5Oc15mmiz7LvDbf9KayvIG3BEDQQTRis9Vmz9bs6TxKSwgyjBYjTE8YJ7KYT2ZcZ42SGRWWe5WVe2p3p6a8v9A3c6V5N72gW1Q+Wn/Kleopav79+3973977/79+3/7533PnvXv3vvvf/66+++/v/+/ff//ff/+vvff/+v3v3/rff//ffv/ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//ffv///ffv//feed">
+  <div class="hero-copy">
+    <div class="kicker">Club de Aventureros</div>
+    <h1>Arcángel <span>Descubre tu clase</span></h1>
+    <p>Inscríbete para registrar tus datos correctamente en el sistema oficial.</p>
   </div>
+</header>
 
-  <footer>
-    Club de Aventureros Arcángel &copy; 2026
-  </footer>
+<div class="content">
+  <div class="panel">
+    <h2>Registro de Participantes</h2>
+    <p class="lead">Ingresa tus datos a continuación para registrarte.</p>
+    
+    <!-- MODIFICADO: Apunta al archivo procesar.php mediante POST -->
+    <form action="procesar.php" method="POST">
+      <div class="form-row">
+        <input type="text" name="nombre" placeholder="Nombre completo" required>
+        <input type="email" name="email" placeholder="Correo electrónico" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit" class="primary">Registrarse</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<footer>
+  Club de Aventureros Arcángel &copy; 2026
+</footer>
 </div>
 </body>
 </html>
